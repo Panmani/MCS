@@ -86,7 +86,7 @@ class VCRDataset(Dataset):
                  aspect_grouping=False, basic_align=False, qa2r_noq=False, qa2r_aug=False,
                  # ========================== ianma ==========================
                  # seq_len restricts max question length
-                 seq_len=150,
+                 seq_len=200,
                  # ===========================================================
                  **kwargs):
         """
