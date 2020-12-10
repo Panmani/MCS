@@ -1,0 +1,15 @@
+# data science and numerical computing
+numpy
+matplotlib
+scipy
+scikit-learn
+ftfy==5.1
+tqdm
+pandas
+ipython
+
+# pytorch libraries
+tensorboardX
+torch==1.5.0
+torchvision==0.6.0
+transformers==2.4.1
