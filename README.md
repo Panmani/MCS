@@ -1,5 +1,5 @@
 # Machine Commonsense (MCS)
-The project aims to experiment with adding temporal information to VCR and see whether the addition sentences can improve the accuracy on the VCR task.
+The project aims to experiment with adding temporal information from the VisualCOMET dataset to the multiple choice questions in the VCR dataset and see whether the additional sentences can improve the accuracy on the VCR task.
 
 > Work in progress
 
