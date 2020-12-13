@@ -14,6 +14,8 @@ The project aims to experiment with adding temporal information from the VisualC
 
 ============================ VCR ============================
 {
+  "question": Why is [2] not looking at [0]?
+
   "answer_choices":
   a) Something else has captured her attention.
   b) [2] is turned around because [0] is speaking with her.
