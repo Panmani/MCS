@@ -49,7 +49,7 @@ The project aims to experiment with adding temporal information from the VisualC
   ...
 }
 ```
-> The indices in the annotations start from 0 while the indices in images start from 1.
+> The indices in the VCR annotations start from 0 while the indices in VisualCOMET annotations and images start from 1.
 
 
 ## GPT-2
