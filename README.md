@@ -14,42 +14,50 @@ The project aims to experiment with adding temporal information from the VisualC
 
 ============================ VCR ============================
 {
-  "question": Why is [2] not looking at [0]?
-
+  "question": Why is [3] not looking at [1]?
   "answer_choices":
-  a) Something else has captured her attention.
-  b) [2] is turned around because [0] is speaking with her.
-  c) She is too embarrassed to look at him.
-  d) [2] does not want [0] to see something that is upsetting her.
-
+            a) Something else has captured her attention.
+            b) [3] is turned around because [1] is speaking with her.
+            c) She is too embarrassed to look at him.
+            d) [3] does not want [1] to see something that is upsetting her.
   "answer_label": a)
-
   ...
 }
 
-======================== VisualCOMET ========================
+======================== VisualCOMET (ground truth) ========================
 {
   "place": "at a fancy party",
-
   "event": "1 is trying to talk to the pretty woman in front of him",
-
   "intent": ["ask the woman on a date",
              "get over his shyness"],
-
   "before": ["approach 3 at an event",
              "introduce himself to 3",
              "be invited to a dinner party",
              "dress in formal attire"],
-
   "after": ["ask 3 to dance",
             "try to make a date with 3",
             "greet her by kissing her hand",
             "order a drink from the server"]
+    ...
+}
 
-  ...
+======================== VisualCOMET (inferred from GPT-2) ========================
+{
+  "intent": ["show 1 his affection for her",
+             "finish speaking with 1"],
+  "before": ["have 3 introduce himself to her",
+             "walk towards the man"],
+  "after": ["talk with 3",
+            "talk about what she just saw"]
+    ...
 }
 ```
-> The indices in the VCR annotations start from 0 while the indices in VisualCOMET annotations and images start from 1.
+
+> “Intent”:   PersonX wanted to…</br>
+> “Before”: PersonX needed to…</br>
+> “After”:    PersonX will most likely...</br>
+
+> The indices in the example above all start from 1. But the raw indices in the VCR annotations start from 0 while the indices in the VisualCOMET annotations and images start from 1.
 
 
 ## GPT-2
