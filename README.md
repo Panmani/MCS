@@ -21,7 +21,7 @@ The project aims to experiment with adding temporal information from the VisualC
             c) She is too embarrassed to look at him.
             d) [3] does not want [1] to see something that is upsetting her.
   "answer_label": a)
-  ...
+    ...
 }
 
 ======================== VisualCOMET (ground truth) ========================
