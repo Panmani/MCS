@@ -94,8 +94,11 @@ $ python vcr/val.py \
 ## Current Results
 When VL-BERT is trained with ground truth VisualCOMET annotations, we get about 3% increase in VCR accuracy:
 
-### Training set
-![GT VL-BERT TRAIN](images/train_acc.png)
+### Comparison
+![COMPARISON](images/comparison.png)
 
-### Validation set
+<!-- ### Training set
+![GT VL-BERT TRAIN](images/train_acc.png) -->
+
+### Validation Accuracy
 ![GT VL-BERT VAL](images/val_acc.png)
