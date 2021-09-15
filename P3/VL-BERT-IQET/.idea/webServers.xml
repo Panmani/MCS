@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="6f75507f-29be-42de-9497-13281b45e041" name="VLBERT">
+        <fileTransfer accessType="SFTP" host="pineapple.cs.columbia.edu" port="22" sshConfigId="fc8e4143-c079-489a-baf7-a95dda0542a3" sshConfig="yueen@pineapple.cs.columbia.edu:22 key" keyPair="true">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" keepAliveTimeout="0" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

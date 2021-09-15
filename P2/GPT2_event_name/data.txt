@@ -1,0 +1,388 @@
+# with open(os.path.join(os.path.dirname(__file__), 'cocoontology.json'), 'r') as f:
+#     coco = json.load(f)
+#
+# with open(os.path.join(VCR_FEATURES_DIR,id)+'.pkl','rb') as p:
+#     features_dict = pickle.load(p)
+
+
+
+
+#split_filename = '{}_annots.json'.format(split)
+#records[split] = read_and_parse_finetune_json(os.path.join(vcg_dir, split_filename))
+
+
+vcg.py:
+  info = {k: record[k] for k in record if k not in relations}
+  info['event_idx'] = idx
+  info['inference_relation'] = r
+  info['inference_text'] = inference
+  # replace person id token with special tokens used in tokenizer
+  map_idx, event_name = _map_numbers_to_det_numbers(info['event'])
+  info['event_name'] = event_name
+  map_idx, inference_name = _map_numbers_to_det_numbers(inference, map_idx)
+  info['inference_text_name'] = inference_name
+  info['person2name'] = map_idx
+  info['name2person'] = {v: k for k,v in map_idx.items()}
+
+vcg_generation.py:
+  relations = ['intent', 'before', 'after']
+  for idx, record in enumerate(records):
+      for r in relations:
+          info = {k: record[k] for k in record if k not in relations}
+          info['event_idx'] = idx
+          map_idx, event_name = _map_numbers_to_det_numbers(info['event'])
+          info['event_name'] = event_name
+          info['inference_relation'] = r
+
+
+
+{"img_fn": "lsmdc_0010_Frau_Ohne_Gewissen/0010_Frau_Ohne_Gewissen_01.30.39.397-01.30.46.003@0.jpg",
+"movie": "0010_Frau_Ohne_Gewissen",
+"metadata_fn": "lsmdc_0010_Frau_Ohne_Gewissen/0010_Frau_Ohne_Gewissen_01.30.39.397-01.30.46.003@0.json",
+"split": "val",
+"place": "inside",
+"event": "2 is carrying a note book and is walking toward a door",
+"intent": ["leave the room", "transport the notebook"],
+"before": ["be looking for a certain office in the building", "ask the elevator operator for directions", "be a trained detective", "be at the scene of a crime"],
+"after": ["get into the elevator", "be taken to the correct floor", "exit the elevator thanking the elevator operator", "perform an investigation", "look for evidence"]
+}
+
+record[idx] =
+{ 'img_fn': 'movieclips_Barton_Fink/0CrSOPGvblI@0.jpg',
+  'movie': 'Barton Fink (1991)',
+  'metadata_fn': 'movieclips_Barton_Fink/0CrSOPGvblI@0.json',
+  'split': 'train',
+  'place': 'in an office room',
+  'event': '1 is wearing a brown business suit and walking into a room',
+  'event_idx': 1763,
+  'inference_relation': 'intent',
+  'inference_text': 'attain his goals',
+  'event_name': 'Riley is wearing a brown business suit and walking into a room',
+  'inference_text_name': 'attain his goals',
+  'person2name': {'1': 'Riley'},
+  'name2person': {'Riley': '1'}
+}
+
+
+
+# with open(os.path.join(VCR_IMAGES_DIR, item['metadata_fn']), 'r') as f:
+#     metadata = json.load(f)
+
+metadata[idx] =
+{'boxes': [[3.759063720703125, 247.49313354492188, 651.8890380859375, 1012.8017578125, 0.995603084564209], [223.9254608154297, 178.38299560546875, 725.0128784179688, 893.8145141601562, 0.8270914554595947], [373.48614501953125, 341.2571105957031, 1909.721923828125, 1038.0, 0.82598876953125]], 'segms': [[[[385, 277], [384, 278], [368, 280], [362, 281], [358, 283], [338, 294], [326, 300], [318, 302], [314, 304], [308, 307], [305, 309], [302, 311], [297, 315], [290, 322], [285, 326], [280, 330], [276, 332], [272, 335], [265, 342], [262, 349], [259, 354], [257, 357], [255, 360], [252, 364], [245, 372], [243, 375], [241, 378], [234, 389], [230, 397], [227, 401], [218, 410], [214, 415], [212, 418], [208, 426], [206, 429], [199, 436], [194, 442], [192, 445], [189, 450], [186, 457], [183, 461], [178, 466], [177, 466], [173, 470], [170, 474], [168, 477], [162, 490], [158, 496], [153, 502], [151, 505], [150, 507], [148, 512], [144, 524], [141, 534], [140, 544], [136, 560], [135, 563], [134, 566], [132, 571], [129, 576], [127, 581], [126, 586], [125, 589], [119, 600], [116, 605], [113, 610], [105, 621], [101, 628], [100, 630], [96, 639], [94, 646], [93, 648], [90, 653], [88, 656], [82, 663], [79, 668], [75, 677], [72, 682], [69, 686], [66, 690], [59, 698], [48, 709], [44, 712], [36, 716], [26, 726], [25, 729], [22, 733], [14, 741], [12, 744], [9, 750], [8, 753], [7, 761], [6, 772], [5, 815], [5, 972], [6, 982], [7, 990], [8, 997], [9, 1000], [11, 1003], [15, 1007], [19, 1008], [27, 1009], [36, 1010], [87, 1010], [181, 1009], [274, 1011], [346, 1011], [362, 1010], [367, 1009], [379, 1006], [382, 1005], [385, 1004], [391, 1001], [394, 998], [395, 995], [399, 983], [400, 979], [401, 975], [404, 962], [405, 953], [406, 949], [407, 945], [409, 941], [412, 937], [415, 930], [417, 925], [418, 919], [420, 914], [423, 908], [426, 903], [428, 900], [434, 893], [444, 877], [450, 869], [457, 861], [462, 854], [464, 851], [466, 848], [472, 837], [474, 834], [476, 831], [483, 824], [485, 821], [487, 818], [491, 810], [492, 807], [495, 793], [496, 790], [498, 785], [504, 774], [506, 769], [508, 764], [511, 755], [514, 740], [518, 728], [519, 726], [521, 723], [533, 711], [538, 705], [541, 701], [545, 694], [557, 681], [560, 677], [563, 673], [572, 660], [575, 655], [581, 643], [582, 637], [585, 629], [587, 624], [589, 619], [593, 611], [600, 601], [603, 596], [607, 588], [612, 574], [615, 567], [622, 554], [625, 547], [627, 542], [629, 537], [633, 523], [635, 518], [641, 507], [642, 503], [643, 499], [644, 494], [645, 489], [646, 483], [646, 423], [645, 413], [644, 405], [643, 397], [642, 393], [641, 389], [630, 378], [626, 373], [622, 368], [617, 360], [611, 354], [605, 345], [600, 336], [595, 325], [593, 323], [590, 322], [573, 317], [571, 316], [569, 317], [566, 319], [557, 322], [553, 323], [548, 324], [544, 322], [527, 313], [519, 310], [499, 304], [490, 300], [488, 299], [486, 298], [484, 296], [478, 293], [468, 292], [456, 292], [452, 290], [434, 281], [429, 280], [411, 280], [399, 278], [388, 277]]], [[[698, 599], [697, 612], [698, 613], [698, 618], [699, 602]], [[375, 426], [374, 428], [371, 437], [370, 441], [369, 445], [369, 527], [368, 534], [365, 548], [365, 572], [364, 577], [363, 581], [359, 593], [357, 595], [348, 596], [338, 596], [331, 592], [323, 589], [314, 588], [304, 588], [302, 586], [298, 581], [295, 577], [293, 574], [293, 548], [292, 546], [290, 543], [288, 540], [286, 538], [264, 538], [260, 539], [256, 540], [254, 541], [252, 543], [250, 544], [248, 544], [238, 542], [233, 542], [232, 544], [232, 569], [231, 579], [229, 587], [228, 595], [227, 618], [226, 649], [225, 689], [224, 744], [224, 827], [225, 881], [226, 884], [228, 887], [233, 892], [264, 893], [301, 893], [365, 893], [416, 893], [430, 892], [433, 891], [438, 889], [440, 888], [446, 884], [450, 880], [453, 875], [465, 854], [470, 847], [483, 831], [485, 828], [489, 821], [493, 814], [495, 810], [498, 804], [499, 794], [500, 789], [504, 779], [505, 772], [505, 766], [508, 756], [508, 752], [507, 750], [505, 747], [500, 741], [499, 738], [496, 729], [496, 726], [499, 721], [502, 718], [507, 716], [520, 712], [527, 708], [532, 705], [535, 703], [537, 701], [539, 698], [540, 695], [550, 685], [554, 683], [556, 681], [558, 678], [560, 675], [564, 667], [572, 656], [575, 650], [576, 645], [576, 641], [577, 637], [578, 633], [582, 621], [584, 616], [587, 610], [590, 606], [593, 600], [594, 595], [594, 591], [595, 587], [596, 584], [597, 581], [601, 574], [602, 567], [603, 564], [608, 554], [609, 551], [609, 546], [608, 544], [605, 541], [599, 538], [596, 537], [593, 537], [592, 536], [590, 536], [584, 539], [577, 543], [572, 547], [571, 547], [569, 551], [568, 561], [567, 566], [566, 569], [565, 572], [564, 574], [563, 575], [561, 576], [556, 578], [554, 578], [551, 576], [548, 573], [547, 569], [545, 563], [543, 553], [542, 550], [541, 548], [536, 544], [534, 545], [532, 547], [529, 548], [528, 549], [527, 551], [523, 560], [521, 563], [519, 565], [518, 563], [517, 562], [516, 557], [516, 553], [515, 549], [514, 547], [513, 545], [510, 541], [506, 536], [500, 531], [496, 532], [487, 535], [484, 536], [479, 540], [472, 548], [471, 550], [470, 553], [469, 556], [467, 563], [466, 567], [465, 572], [463, 571], [460, 569], [457, 568], [452, 567], [448, 567], [446, 565], [446, 561], [444, 551], [441, 539], [438, 531], [437, 527], [436, 523], [436, 500], [438, 483], [438, 445], [435, 441], [430, 436], [428, 435], [412, 435], [409, 434], [395, 427], [392, 426], [382, 425]], [[286, 337], [285, 339], [283, 343], [283, 358], [281, 369], [283, 369], [286, 371], [288, 369], [289, 364], [289, 357], [290, 350], [291, 342], [291, 340], [288, 337]], [[531, 179], [484, 180], [441, 181], [430, 183], [418, 183], [410, 184], [406, 185], [402, 186], [399, 187], [396, 188], [394, 189], [392, 191], [391, 194], [388, 203], [386, 210], [385, 214], [384, 220], [384, 228], [383, 235], [382, 239], [381, 243], [379, 247], [376, 251], [375, 253], [374, 258], [368, 270], [365, 274], [357, 282], [353, 285], [350, 287], [347, 289], [345, 290], [341, 291], [339, 292], [335, 296], [329, 299], [326, 300], [322, 300], [319, 302], [311, 308], [306, 310], [300, 314], [296, 318], [296, 322], [297, 326], [298, 328], [300, 330], [302, 331], [309, 334], [314, 336], [317, 337], [322, 338], [324, 337], [326, 335], [331, 333], [338, 328], [340, 327], [351, 326], [359, 327], [360, 329], [362, 333], [363, 336], [364, 340], [365, 350], [365, 370], [367, 375], [373, 387], [375, 389], [375, 390], [381, 391], [394, 390], [402, 386], [411, 383], [424, 383], [430, 382], [433, 380], [436, 378], [443, 372], [445, 370], [445, 361], [444, 360], [444, 350], [443, 343], [441, 340], [438, 336], [433, 330], [430, 327], [428, 326], [422, 325], [417, 325], [412, 324], [410, 323], [407, 321], [404, 318], [404, 315], [406, 309], [410, 297], [411, 295], [421, 294], [430, 292], [430, 290], [432, 288], [432, 287], [433, 286], [434, 286], [436, 284], [438, 283], [442, 282], [454, 282], [463, 284], [468, 284], [479, 282], [485, 282], [490, 283], [495, 284], [499, 285], [505, 288], [508, 290], [511, 293], [518, 297], [523, 299], [531, 302], [539, 304], [555, 310], [567, 316], [571, 320], [574, 327], [577, 332], [581, 337], [583, 339], [590, 345], [591, 350], [593, 361], [593, 367], [594, 371], [598, 383], [604, 394], [604, 415], [605, 422], [608, 427], [614, 445], [614, 447], [613, 450], [610, 460], [609, 463], [608, 466], [606, 471], [601, 482], [593, 497], [601, 505], [610, 511], [616, 514], [622, 516], [626, 516], [633, 510], [640, 504], [647, 497], [648, 492], [650, 488], [653, 482], [662, 473], [663, 469], [664, 460], [665, 450], [665, 420], [664, 412], [663, 405], [662, 399], [661, 395], [656, 387], [654, 382], [653, 378], [652, 371], [651, 368], [650, 365], [644, 353], [638, 346], [637, 344], [636, 342], [635, 329], [635, 315], [638, 300], [639, 291], [639, 265], [637, 249], [636, 241], [635, 236], [634, 231], [631, 218], [630, 215], [629, 212], [626, 206], [621, 199], [620, 197], [619, 193], [618, 190], [611, 183], [609, 182], [607, 181], [600, 180], [593, 179], [567, 180], [547, 179]]], [[[1862, 404], [1827, 405], [1812, 408], [1803, 410], [1791, 413], [1780, 416], [1773, 419], [1766, 420], [1750, 422], [1718, 426], [1707, 427], [1694, 428], [1677, 428], [1660, 429], [1643, 431], [1618, 434], [1609, 435], [1604, 436], [1591, 439], [1586, 440], [1554, 448], [1539, 449], [1519, 450], [1498, 451], [1482, 449], [1465, 448], [1447, 447], [1441, 447], [1429, 448], [1405, 450], [1393, 451], [1384, 452], [1377, 453], [1370, 455], [1363, 456], [1355, 457], [1346, 458], [1337, 458], [1328, 459], [1313, 462], [1290, 465], [1282, 466], [1257, 469], [1231, 471], [1222, 472], [1207, 475], [1193, 479], [1188, 480], [1183, 481], [1172, 482], [1166, 483], [1131, 491], [1120, 493], [1114, 494], [1101, 495], [1083, 498], [1072, 500], [1067, 501], [1062, 502], [1058, 503], [1053, 505], [1045, 509], [1037, 512], [1025, 516], [1015, 519], [1001, 522], [995, 524], [986, 527], [981, 530], [973, 533], [970, 534], [963, 536], [951, 539], [942, 541], [933, 542], [920, 545], [903, 549], [899, 550], [895, 551], [892, 552], [881, 558], [874, 561], [866, 564], [860, 566], [851, 569], [841, 571], [838, 572], [835, 573], [825, 577], [821, 580], [812, 584], [807, 586], [801, 588], [792, 591], [782, 593], [779, 594], [776, 595], [771, 597], [766, 599], [760, 602], [757, 604], [751, 609], [748, 611], [743, 614], [735, 618], [720, 625], [708, 633], [696, 639], [687, 643], [677, 646], [669, 650], [655, 660], [644, 667], [624, 679], [618, 682], [613, 684], [607, 686], [598, 689], [591, 691], [579, 694], [566, 696], [563, 697], [561, 698], [559, 700], [556, 701], [555, 702], [555, 703], [551, 708], [548, 713], [542, 725], [535, 744], [532, 751], [529, 756], [527, 759], [525, 762], [522, 766], [507, 781], [502, 787], [496, 796], [492, 804], [490, 810], [486, 824], [485, 826], [484, 828], [481, 832], [476, 838], [471, 843], [465, 848], [460, 851], [457, 855], [453, 860], [449, 865], [443, 875], [430, 892], [424, 901], [421, 907], [415, 920], [409, 931], [406, 936], [400, 944], [397, 950], [396, 953], [392, 969], [391, 974], [391, 1000], [394, 1004], [400, 1010], [403, 1011], [410, 1013], [422, 1016], [431, 1018], [440, 1020], [445, 1021], [450, 1022], [504, 1022], [578, 1021], [612, 1020], [639, 1019], [665, 1017], [703, 1017], [781, 1019], [787, 1019], [858, 1017], [897, 1017], [906, 1018], [922, 1020], [946, 1024], [958, 1025], [979, 1026], [1003, 1027], [1026, 1028], [1052, 1029], [1074, 1029], [1132, 1028], [1163, 1030], [1254, 1030], [1307, 1032], [1386, 1032], [1490, 1031], [1514, 1030], [1531, 1029], [1561, 1027], [1576, 1026], [1589, 1025], [1598, 1023], [1606, 1022], [1608, 1022], [1614, 1023], [1620, 1025], [1628, 1026], [1638, 1027], [1648, 1028], [1659, 1029], [1687, 1029], [1728, 1028], [1760, 1025], [1882, 1025], [1892, 1015], [1895, 1011], [1897, 1008], [1900, 1003], [1901, 1001], [1902, 998], [1904, 989], [1905, 984], [1906, 979], [1907, 967], [1908, 854], [1908, 602], [1906, 563], [1907, 534], [1907, 524], [1906, 498], [1905, 484], [1904, 472], [1903, 462], [1902, 453], [1901, 449], [1900, 445], [1894, 427], [1892, 422], [1886, 410], [1884, 408], [1883, 405]]]], 'names': ['person', 'person', 'car'], 'width': 1920, 'height': 1039}
+
+
+
+
+detectron2 instance
+
+'image_instances': Instances(
+                        num_instances=1,
+                        image_height=511,
+                        image_width=640,
+                        fields=[
+                            pred_boxes = Boxes(tensor([[  0.,   0., 640., 511.]], device='cuda:0')),
+                            scores = tensor([0.5249], device='cuda:0'),
+                            pred_classes = tensor([2], device='cuda:0'),
+                            attr_scores = tensor([0.2624], device='cuda:0'),
+                            attr_classes = tensor([7], device='cuda:0'), ]),
+
+'object_instances': Instances(num_instances=36, image_height=511, image_width=640, fields=[pred_boxes = Boxes(tensor([[404.5532, 273.4044, 502.7062, 453.0906],
+        [ 16.3858, 281.8409, 139.9048, 489.7293],
+        [  2.1360, 374.1326, 464.8943, 509.8208],
+        [  6.7388, 305.3853, 138.0648, 399.5295],
+        [  0.0000, 281.5195, 148.6977, 423.7586],
+        [ 77.8642, 368.8070, 632.2292, 509.6517],
+        [  5.3406, 141.7309, 517.8867, 468.5215],
+        [  0.0000, 197.6781, 139.9616, 507.8978],
+        [361.8385,  25.5799, 635.8769, 349.8300],
+        [ 10.6987,   9.9195, 538.1240, 399.7299],
+        [155.6162,  44.6639, 637.4398, 453.5031],
+        [ 81.5861, 305.9698, 476.2457, 504.3910],
+        [464.7535,  96.0403, 543.6511, 180.2924],
+        [252.8951, 384.7097, 585.1714, 504.1791],
+        [597.3776, 344.5053, 634.7593, 375.8430],
+        [  0.0000,   2.0314, 193.0546, 414.5413],
+        [ 87.6178, 213.2608, 175.6150, 489.0273],
+        [ 60.8049,   1.0937, 313.6698, 417.9030],
+        [413.9375, 270.0292, 491.8303, 357.7253],
+        [319.7232,   5.5272, 539.0768, 455.6385],
+        [301.9206,   6.0008, 389.7945, 403.5988],
+        [228.8636, 153.2661, 638.6456, 511.0000],
+        [  5.0678, 301.7516, 264.9173, 511.0000],
+        [  3.0747,   0.0000, 263.6342, 290.5869],
+        [240.7108, 306.4030, 637.1495, 503.6913],
+        [ 12.9429,  82.5196, 360.0863, 473.5439],
+        [  1.6284,  94.9002, 231.0231, 479.2104],
+        [362.5137, 169.8507, 549.9595, 502.3732],
+        [249.4302,   2.4470, 508.0697, 380.6390],
+        [106.6470,  98.4438, 464.2882, 509.5352],
+        [ 27.9007, 248.2607, 544.6673, 511.0000],
+        [ 94.8578,   0.0000, 438.3599, 301.9254],
+        [213.4809,   0.0000, 586.3447, 302.4365],
+        [  1.3321,   3.8504, 132.3296, 362.7911],
+        [  5.9996,   0.0000, 513.5323, 212.4323],
+        [344.6486,  38.6109, 591.0123, 494.8350]], device='cuda:0')), scores = tensor([0.9699, 0.8967, 0.8417, 0.8361, 0.8305, 0.8170, 0.7605, 0.7176, 0.7003,
+        0.6715, 0.6622, 0.6541, 0.6479, 0.6088, 0.6073, 0.6061, 0.5976, 0.5778,
+        0.5676, 0.5373, 0.5345, 0.5220, 0.5173, 0.4922, 0.4709, 0.4673, 0.4549,
+        0.4531, 0.4375, 0.4352, 0.3466, 0.3444, 0.3387, 0.3329, 0.3240, 0.3055],
+       device='cuda:0'), pred_classes = tensor([ 14,  69, 200,  69,  69, 200,   2,  69, 248,   2,   2, 200, 893, 200,
+        697, 248, 528, 248, 548, 248, 129,   2,  69, 248, 200,   2, 248,  14,
+        248,   2,   2, 248, 248, 248, 248,   2], device='cuda:0'), attr_scores = tensor([0.5269, 0.5104, 0.3708, 0.5899, 0.5512, 0.3465, 0.2492, 0.4439, 0.4570,
+        0.3762, 0.3206, 0.3060, 0.6264, 0.4168, 0.5951, 0.4258, 0.7625, 0.4369,
+        0.5412, 0.4918, 0.4143, 0.2227, 0.5603, 0.5182, 0.2058, 0.3169, 0.3757,
+        0.6183, 0.4816, 0.3143, 0.2235, 0.4775, 0.4493, 0.4119, 0.4665, 0.5422],
+       device='cuda:0'), attr_classes = tensor([  7,   7,   0,   7,   7,   0,   7,   7,   7,   7,   7,   7,   7,   0,
+        141,   7,   6,   7,  78,   7,   7,   7,   7,   7,   0,   7,   7,   7,
+          7,   7,   7,   7,   7,   7,   7,   7], device='cuda:0'), ])}
+
+
+eval_dataset,
+
+{'train': <dataloaders.vcg_generation.VCGGenLoader object at 0x7f1e1fb0bcd0>, 'val': <dataloaders.vcg_generation.VCGGenLoader object at 0x7f1e1f371a90>, 'test': <dataloaders.vcg_generation.VCGGenLoader object at 0x7f1e1edaaf90>}
+<dataloaders.vcg_generation.VCGGenLoader object at 0x7f1e1f371a90> ---
+
+print(all_records)
+
+out to the ocean'], 'inference_text_name': ['Be near a railing', 'Want to hold the railing', 'Walk over to the edge', 'Look out to the ocean'], 'person2name': {'7': '<|det7|>'}, 'name2person': {'<|det7|>': '7'}}, {'img_fn': 'lsmdc_1010_TITANIC/1010_TITANIC_00.31.13.591-00.31.19.319@0.jpg', 'movie': '1010_TITANIC', 'metadata_fn': 'lsmdc_1010_TITANIC/1010_TITANIC_00.31.13.591-00.31.19.319@0.json', 'split': 'val', 'place': 'on a ship', 'event': '7 holds on to the railing', 'event_idx': 13759, 'event_name': '<|det7|> holds on to the railing', 'inference_relation': 'after', 'inference_text': ['Let go of the railing', 'Continue holding on to the railing', 'Stare in the distance', 'Walk back'], 'inference_text_name': ['Let go of the railing', 'Continue holding on to the railing', 'Stare in the distance', 'Walk back'], 'person2name': {'7': '<|det7|>'}, 'name2person': {'<|det7|>': '7'}}, {'img_fn': 'movieclips_Billy_Elliot/jmgV3OFn0aE@17.jpg', 'movie': 'Billy Elliot (2000)', 'metadata_fn': 'movieclips_Billy_Elliot/jmgV3OFn0aE@17.json', 'split': 'val', 'place': 'in a kitchen', 'event': "1 listens attentively to 2's words", 'event_idx': 13760, 'event_name': "<|det1|> listens attentively to <|det2|>  's words", 'inference_relation': 'intent', 'inference_text': ["understand 2's views", 'treat 2 seriously'], 'inference_text_name': ["understand <|det2|>  's views", 'treat <|det2|> seriously'], 'person2name': {'2': '<|det2|>', '1': '<|det1|>'}, 'name2person': {'<|det2|>': '2', '<|det1|>': '1'}}, {'img_fn': 'movieclips_Billy_Elliot/jmgV3OFn0aE@17.jpg', 'movie': 'Billy Elliot (2000)', 'metadata_fn': 'movieclips_Billy_Elliot/jmgV3OFn0aE@17.json', 'split': 'val', 'place': 'in a kitchen', 'event': "1 listens attentively to 2's words", 'event_idx': 13760, 'event_name': "<|det1|> listens attentively to <|det2|>  's words", 'inference_relation': 'before', 'inference_text': ['own and run a restaurant', 'clean off the table before sitting down', 'be called to dinner', 'ask 2 why he looks angry'], 'inference_text_name': ['own and run a restaurant', 'clean off the table before sitting down', 'be called to dinner', 'ask <|det2|> why he looks angry'], 'person2name': {'2': '<|det2|>', '1': '<|det1|>'}, 'name2person': {'<|det2|>': '2', '<|det1|>': '1'}}, {'img_fn': 'movieclips_Billy_Elliot/jmgV3OFn0aE@17.jpg', 'movie': 'Billy Elliot (2000)', 'metadata_fn': 'movieclips_Billy_Elliot/jmgV3OFn0aE@17.json', 'split': 'val', 'place': 'in a kitchen', 'event': "1 listens attentively to 2's words", 'event_idx': 13760, 'event_name': "<|det1|> listens attentively to <|det2|>  's words", 'inference_relation': 'after', 'inference_text': ['fry some potatoes to eat', 'order some food from the waitress', 'tell 2 off', 'be sent to his room'], 'inference_text_name': ['fry some potatoes to eat', 'order some food from the waitress', 'tell <|det2|> off', 'be sent to his room'], 'person2name': {'2': '<|det2|>', '1': '<|det1|>'}, 'name2person': {'<|det2|>': '2', '<|det1|>': '1'}}, {'img_fn': 'movieclips_Billy_Elliot/jmgV3OFn0aE@17.jpg', 'movie': 'Billy Elliot (2000)', 'metadata_fn': 'movieclips_Billy_Elliot/jmgV3OFn0aE@17.json', 'split': 'val', 'place': 'in a kitchen', 'event': '2 gestures to emphasize his opinion', 'event_idx': 13761, 'event_name': '<|det2|> gestures to emphasize his opinion', 'inference_relation': 'intent', 'inference_text': ['convince 1 to his side', 'underscore how firm his beliefs are'], 'inference_text_name': ['convince <|det1|> to his side', 'underscore how firm his beliefs are'], 'person2name': {'2': '<|det2|>', '1': '<|det1|>'}, 'name2person': {'<|det2|>': '2', '<|det1|>': '1'}}, {'img_fn': 'movieclips_Billy_Elliot/jmgV3OFn0aE@17.jpg', 'movie': 'Billy Elliot (2000)', 'metadata_fn': 'movieclips_Billy_Elliot/jmgV3OFn0aE@17.json', 'split': 'val', 'place': 'in a kitchen', 'event': '2 gestures to emphasize his opinion', 'event_idx': 13761, 'event_name': '<|det2|> gestures to emphasize his opinion', 'inference_relation': 'before', 'inference_text': ['feel adamant about a decision', 'begin speaking about something he is passionate about', 'make his point known', 'let 1 know he was serious'], 'inference_text_name': ['feel adamant about a decision', 'begin speaking about something he is passionate about', 'make his point known', 'let <|det1|> know he was serious'], 'person2name': {'2': '<|det2|>', '1': '<|det1|>'}, 'name2person': {'<|det2|>': '2', '<|det1|>': '1'}}, {'img_fn': 'movieclips_Billy_Elliot/jmgV3OFn0aE@17.jpg', 'movie': 'Billy Elliot (2000)', 'metadata_fn': 'movieclips_Billy_Elliot/jmgV3OFn0aE@17.json', 'split': 'val', 'place': 'in a kitchen', 'event': '2 gestures to emphasize his opinion', 'event_idx': 13761, 'event_name': '<|det2|> gestures to emphasize his opinion', 'inference_relation': 'after', 'inference_text': ['listen to 1', 'give 1 advice', 'ask 1 if he understands why he is upset', 'argue with 1 about something'], 'inference_text_name': ['listen to <|det1|>', 'give <|det1|> advice', 'ask <|det1|> if he understands why he is upset', 'argue with <|det1|> about something'], 'person2name': {'2': '<|det2|>', '1': '<|det1|>'}, 'name2person': {'<|det2|>': '2', '<|det1|>': '1'}}, {'img_fn': 'movieclips_Dreamgirls/1mJ49BcUM3E@37.jpg', 'movie': 'Dreamgirls (2006)', 'metadata_fn': 'movieclips_Dreamgirls/1mJ49BcUM3E@37.json', 'split': 'val', 'place': 'in an office', 'event': '2 sits and talks with 1', 'event_idx': 13762, 'event_name': '<|det2|> sits and talks with <|det1|>', 'inference_relation': 'intent', 'inference_text': ['lecture her family about things', 'complain about the wait time'], 'inference_text_name': ['lecture her family about things', 'complain about the wait time'], 'person2name': {'2': '<|det2|>', '1': '<|det1|>'}, 'name2person': {'<|det2|>': '2', '<|det1|>': '1'}}, {'img_fn': 'movieclips_Dreamgirls/1mJ49BcUM3E@37.jpg', 'movie': 'Dreamgirls (2006)', 'metadata_fn': 'movieclips_Dreamgirls/1mJ49BcUM3E@37.json', 'split': 'val', 'place': 'in an office', 'event': '2 sits and talks with 1', 'event_idx': 13762, 'event_name': '<|det2|> sits and talks with <|det1|>', 'inference_relation': 'before', 'inference_text': ['notice 1 sitting down', 'walk towards 1', 'meet with 1', 'find a seat next to 1'], 'inference_text_name': ['notice <|det1|> sitting down', 'walk towards <|det1|>', 'meet with <|det1|>', 'find a seat next to <|det1|>'], 'person2name': {'2': '<|det2|>', '1': '<|det1|>'}, 'name2person': {'<|det2|>': '2', '<|det1|>': '1'}}, {'img_fn': 'movieclips_Dreamgirls/1mJ49BcUM3E@37.jpg', 'movie': 'Dreamgirls (2006)', 'metadata_fn': 'movieclips_Dreamgirls/1mJ49BcUM3E@37.json', 'split': 'val', 'place': 'in an office', 'event': '2 sits and talks with 1', 'event_idx': 13762, 'event_name': '<|det2|> sits and talks with <|det1|>', 'inference_relation': 'after', 'inference_text': ['say something hurtful to1', 'get up and walk away from 1', 'ask 1 how things are going', "wait for 1's response"], 'inference_text_name': ['say something hurtful to1', 'get up and walk away from <|det1|>', 'ask <|det1|> how things are going', "wait for <|det1|>  's response"], 'person2name': {'2': '<|det2|>', '1': '<|det1|>'}, 'name2person': {'<|det2|>': '2', '<|det1|>': '1'}}, {'img_fn': 'movieclips_Dreamgirls/1mJ49BcUM3E@37.jpg', 'movie': 'Dreamgirls (2006)', 'metadata_fn': 'movieclips_Dreamgirls/1mJ49BcUM3E@37.json', 'split': 'val', 'place': 'in an office', 'event': '1 looks down as she talks to 2', 'event_idx': 13763, 'event_name': '<|det1|> looks down as she talks to <|det2|>', 'inference_relation': 'intent', 'inference_text': ['read a magazine', "ignore 2's complaints"], 'inference_text_name': ['read a magazine', "ignore <|det2|>  's complaints"], 'person2name': {'2': '<|det2|>', '1': '<|det1|>'}, 'name2person': {'<|det2|>': '2', '<|det1|>': '1'}}, {'img_fn': 'movieclips_Dreamgirls/1mJ49BcUM3E@37.jpg', 'movie': 'Dreamgirls (2006)', 'metadata_fn': 'movieclips_Dreamgirls/1mJ49BcUM3E@37.json', 'split': 'val', 'place': 'in an office', 'event': '1 looks down as she talks to 2', 'event_idx': 13763, 'event_name': '<|det1|> looks down as she talks to <|det2|>', 'inference_relation': 'before', 'inference_text': ['write notes to speak about', 'tell 2 that she needs to speak with her', 'be at a party', 'be getting some punch'], 'inference_text_name': ['write notes to speak about', 'tell <|det2|> that she needs to speak with her', 'be at a party', 'be getting some punch'], 'person2name': {'2': '<|det2|>', '1': '<|det1|>'}, 'name2person': {'<|det2|>': '2', '<|det1|>': '1'}}, {'img_fn': 'movieclips_Dreamgirls/1mJ49BcUM3E@37.jpg', 'movie': 'Dreamgirls (2006)', 'metadata_fn': 'movieclips_Dreamgirls/1mJ49BcUM3E@37.json', 'split': 'val', 'place': 'in an office', 'event': '1 looks down as she talks to 2', 'event_idx': 13763, 'event_name': '<|det1|> looks down as she talks to <|det2|>', 'inference_relation': 'after', 'inference_text': ['be confronted by 2 about her behavior', 'ask 2 a question about her speech', 'chat with 2 about their kids', 'go find someone to dance with'], 'inference_text_name': ['be confronted by <|det2|> about her behavior', 'ask <|det2|> a question about her speech', 'chat with <|det2|> about their kids', 'go find someone to dance with'], 'person2name': {'2': '<|det2|>', '1': '<|det1|>'}, 'name2person': {'<|det2|>': '2', '<|det1|>': '1'}}, {'img_fn': 'lsmdc_1044_Pride_And_Prejudice_Disk_Two/1044_Pride_And_Prejudice_Disk_Two_00.45.19.424-00.45.24.497@0.jpg', 'movie': '1044_Pride_And_Prejudice_Disk_Two', 'metadata_fn': 'lsmdc_1044_Pride_And_Prejudice_Disk_Two/1044_Pride_And_Prejudice_Disk_Two_00.45.19.424-00.45.24.497@0.json', 'split': 'val', 'place': 'in a home', 'event': '2 escorts 1 and 3 through the house past the library', 'event_idx': 13764, 'event_name': '<|det2|> escorts <|det1|> and <|det3|> through the house past the library', 'inference_relation': 'intent', 'inference_text': ['show 1 and 3 where to sit', 'be friendly to guests 1 and 3'], 'inference_text_name': ['show <|det1|> and <|det3|> where to sit', 'be friendly to guests <|det1|> and <|det3|>'], 'person2name': {'3': '<|det3|>', '2': '<|det2|>', '1': '<|det1|>'}, 'name2person': {'<|det3|>': '3', '<|det2|>': '2', '<|det1|>': '1'}}, {'img_fn': 'lsmdc_1044_Pride_And_Prejudice_Disk_Two/1044_Pride_And_Prejudice_Disk_Two_00.45.19.424-00.45.24.497@0.jpg', 'movie': '1044_Pride_And_Prejudice_Disk_Two', 'metadata_fn': 'lsmdc_1044_Pride_And_Prejudice_Disk_Two/1044_Pride_And_Prejudice_Disk_Two_00.45.19.424-00.45.24.497@0.json', 'split': 'val', 'place': 'in a home', 'event': '2 escorts 1 and 3 through the house past the library', 'event_idx': 13764, 'event_name': '<|det2|> escorts <|det1|> and <|det3|> through the house past the library', 'inference_relation': 'before', 'inference_text': ['Be around 1 and 3', 'Be in a house', 'meet up with 1 and 3', 'open the door'], 'inference_text_name': ['Be around <|det1|> and <|det3|>', 'Be in a house', 'meet up with <|det1|> and <|det3|>', 'open the door'], 'person2name': {'3': '<|det3|>', '2': '<|det2|>', '1': '<|det1|>'}, 'name2person': {'<|det3|>': '3', '<|det2|>': '2', '<|det1|>': '1'}}, {'img_fn': 'lsmdc_1044_Pride_And_Prejudice_Disk_Two/1044_Pride_And_Prejudice_Disk_Two_00.45.19.424-00.45.24.497@0.jpg', 'movie': '1044_Pride_And_Prejudice_Disk_Two', 'metadata_fn': 'lsmdc_1044_Pride_And_Prejudice_Disk_Two/1044_Pride_And_Prejudice_Disk_Two_00.45.19.424-00.45.24.497@0.json', 'split': 'val', 'place': 'in a home', 'event': '2 escorts 1 and 3 through the house past the library', 'event_idx': 13764, 'event_name': '<|det2|> escorts <|det1|> and <|det3|> through the house past the library', 'inference_relation': 'after', 'inference_text': ['Talk with 1 and 3', 'Continue to their destination', 'close the door', 'tell 1 and 3 to leave'], 'inference_text_name': ['Talk with <|det1|> and <|det3|>', 'Continue to their destination', 'close the door', 'tell <|det1|> and <|det3|> to leave'], 'person2name': {'3': '<|det3|>', '2': '<|det2|>', '1': '<|det1|>'}, 'name2person': {'<|det3|>': '3', '<|det2|>': '2', '<|det1|>': '1'}}, {'img_fn': 'lsmdc_1044_Pride_And_Prejudice_Disk_Two/1044_Pride_And_Prejudice_Disk_Two_00.45.19.424-00.45.24.497@0.jpg', 'movie': '1044_Pride_And_Prejudice_Disk_Two', 'metadata_fn': 'lsmdc_1044_Pride_And_Prejudice_Disk_Two/1044_Pride_And_Prejudice_Disk_Two_00.45.19.424-00.45.24.497@0.json', 'split': 'val', 'place': 'in a home', 'event': '3 pauses to admire all the books as she follows 2 through the house', 'event_idx': 13765, 'event_name': '<|det3|> pauses to admire all the books as she follows <|det2|> through the house', 'inference_relation': 'intent', 'inference_text': ['see what books were on the shelf', 'avoid getting lost in the house'], 'inference_text_name': ['see what books were on the shelf', 'avoid getting lost in the house'], 'person2name': {'3': '<|det3|>', '2': '<|det2|>'}, 'name2person': {'<|det3|>': '3', '<|det2|>': '2'}}, {'img_fn': 'lsmdc_1044_Pride_And_Prejudice_Disk_Two/1044_Pride_And_Prejudice_Disk_Two_00.45.19.424-00.45.24.497@0.jpg', 'movie': '1044_Pride_And_Prejudice_Disk_Two', 'metadata_fn': 'lsmdc_1044_Pride_And_Prejudice_Disk_Two/1044_Pride_And_Prejudice_Disk_Two_00.45.19.424-00.45.24.497@0.json', 'split': 'val', 'place': 'in a home', 'event': '3 pauses to admire all the books as she follows 2 through the house', 'event_idx': 13765, 'event_name': '<|det3|> pauses to admire all the books as she follows <|det2|> through the house', 'inference_relation': 'before', 'inference_text': ['look at the books', 'follow after 2', "knock on 2's door", 'wait for 2 to answer the door'], 'inference_text_name': ['look at the books', 'follow after <|det2|>', "knock on <|det2|>  's door", 'wait for <|det2|> to answer the door'], 'person2name': {'3': '<|det3|>', '2': '<|det2|>'}, 'name2person': {'<|det3|>': '3', '<|det2|>': '2'}}, {'img_fn': 'lsmdc_1044_Pride_And_Prejudice_Disk_Two/1044_Pride_And_Prejudice_Disk_Two_00.45.19.424-00.45.24.497@0.jpg', 'movie': '1044_Pride_And_Prejudice_Disk_Two', 'metadata_fn': 'lsmdc_1044_Pride_And_Prejudice_Disk_Two/1044_Pride_And_Prejudice_Disk_Two_00.45.19.424-00.45.24.497@0.json', 'split': 'val', 'place': 'in a home', 'event': '3 pauses to admire all the books as she follows 2 through the house', 'event_idx': 13765, 'event_name': '<|det3|> pauses to admire all the books as she follows <|det2|> through the house', 'inference_relation': 'after', 'inference_text': ['read the book titles', 'ask to borrow a book', 'ask to borrow a book from 2', 'get a house tour from 2'], 'inference_text_name': ['read the book titles', 'ask to borrow a book', 'ask to borrow a book from <|det2|>', 'get a house tour from <|det2|>'], 'person2name': {'3': '<|det3|>', '2': '<|det2|>'}, 'name2person': {'<|det3|>': '3', '<|det2|>': '2'}}, {'img_fn': 'lsmdc_0014_Ist_das_Leben_nicht_schoen/0014_Ist_das_Leben_nicht_schoen_00.08.51.223-00.08.51.865@0.jpg', 'movie': '0014_Ist_das_Leben_nicht_schoen', 'metadata_fn': 'lsmdc_0014_Ist_das_Leben_nicht_schoen/0014_Ist_das_Leben_nicht_schoen_00.08.51.223-00.08.51.865@0.json', 'split': 'val', 'place': 'in the street', 'event': '1 is holding the reins as he sits on top of the carriage looking at 2', 'event_idx': 13766, 'event_name': '<|det1|> is holding the reins as he sits on top of the carriage looking at <|det2|>', 'inference_relation': 'intent', 'inference_text': ['wait for someone', 'see what the boy wanted'], 'inference_text_name': ['wait for someone', 'see what the boy wanted'], 'person2name': {'2': '<|det2|>', '1': '<|det1|>'}, 'name2person': {'<|det2|>': '2', '<|det1|>': '1'}}, {'img_fn': 'lsmdc_0014_Ist_das_Leben_nicht_schoen/0014_Ist_das_Leben_nicht_schoen_00.08.51.223-00.08.51.865@0.jpg', 'movie': '0014_Ist_das_Leben_nicht_schoen', 'metadata_fn': 'lsmdc_0014_Ist_das_Leben_nicht_schoen/0014_Ist_das_Leben_nicht_schoen_00.08.51.223-00.08.51.865@0.json', 'split': 'val', 'place': 'in the street', 'event': '1 is holding the reins as he sits on top of the carriage looking at 2', 'event_idx': 13766, 'event_name': '<|det1|> is holding the reins as he sits on top of the carriage looking at <|det2|>', 'inference_relation': 'before', 'inference_text': ['know how to drive a carriage', 'have drive 2 to his destination', 'see 2 on the sidewalk', 'pull over to pick up 2'], 'inference_text_name': ['know how to drive a carriage', 'have drive <|det2|> to his destination', 'see <|det2|> on the sidewalk', 'pull over to pick up <|det2|>'], 'person2name': {'2': '<|det2|>', '1': '<|det1|>'}, 'name2person': {'<|det2|>': '2', '<|det1|>': '1'}}, {'img_fn': 'lsmdc_0014_Ist_das_Leben_nicht_schoen/0014_Ist_das_Leben_nicht_schoen_00.08.51.223-00.08.51.865@0.jpg', 'movie': '0014_Ist_das_Leben_nicht_schoen', 'metadata_fn': 'lsmdc_0014_Ist_das_Leben_nicht_schoen/0014_Ist_das_Leben_nicht_schoen_00.08.51.223-00.08.51.865@0.json', 'split': 'val', 'place': 'in the street', 'event': '1 is holding the reins as he sits on top of the carriage looking at 2', 'event_idx': 13766, 'event_name': '<|det1|> is holding the reins as he sits on top of the carriage looking at <|det2|>', 'inference_relation': 'after', 'inference_text': ['watch 2 go up the stairs behind him', 'ride away down the street when 2 leaves', 'wait for 2 to get aboard the horse', 'move the reigns to make the horse go'], 'inference_text_name': ['watch <|det2|> go up the stairs behind him', 'ride away down the street when <|det2|> leaves', 'wait for <|det2|> to get aboard the horse', 'move the reigns to make the horse go'], 'person2name': {'2': '<|det2|>', '1': '<|det1|>'}, 'name2person': {'<|det2|>': '2', '<|det1|>': '1'}}, {'img_fn': 'lsmdc_0014_Ist_das_Leben_nicht_schoen/0014_Ist_das_Leben_nicht_schoen_00.08.51.223-00.08.51.865@0.jpg', 'movie': '0014_Ist_das_Leben_nicht_schoen', 'metadata_fn': 'lsmdc_0014_Ist_das_Leben_nicht_schoen/0014_Ist_das_Leben_nicht_schoen_00.08.51.223-00.08.51.865@0.json', 'split': 'val', 'place': 'in the street', 'event': '2 is walking down the sidewalk looking up at 1', 'event_idx': 13767, 'event_name': '<|det2|> is walking down the sidewalk looking up at <|det1|>', 'inference_relation': 'intent', 'inference_text': ['ask him a question', 'see about a ride', 'ask him for a job'], 'inference_text_name': ['ask him a question', 'see about a ride', 'ask him for a job'], 'person2name': {'2': '<|det2|>', '1': '<|det1|>'}, 'name2person': {'<|det2|>': '2', '<|det1|>': '1'}}, {'img_fn': 'lsmdc_0014_Ist_das_Leben_nicht_schoen/0014_Ist_das_Leben_nicht_schoen_00.08.51.223-00.08.51.865@0.jpg', 'movie': '0014_Ist_das_Leben_nicht_schoen', 'metadata_fn': 'lsmdc_0014_Ist_das_Leben_nicht_schoen/0014_Ist_das_Leben_nicht_schoen_00.08.51.223-00.08.51.865@0.json', 'split': 'val', 'place': 'in the street', 'event': '2 is walking down the sidewalk looking up at 1', 'event_idx': 13767, 'event_name': '<|det2|> is walking down the sidewalk looking up at <|det1|>', 'inference_relation': 'before', 'inference_text': ['exit the building', 'see 1 on the carriage', 'head out onto the sidewalk', 'notice 1', "turn his head in 1's direction"], 'inference_text_name': ['exit the building', 'see <|det1|> on the carriage', 'head out onto the sidewalk', 'notice <|det1|>', "turn his head in <|det1|>  's direction"], 'person2name': {'2': '<|det2|>', '1': '<|det1|>'}, 'name2person': {'<|det2|>': '2', '<|det1|>': '1'}}, {'img_fn': 'lsmdc_0014_Ist_das_Leben_nicht_schoen/0014_Ist_das_Leben_nicht_schoen_00.08.51.223-00.08.51.865@0.jpg', 'movie': '0014_Ist_das_Leben_nicht_schoen', 'metadata_fn': 'lsmdc_0014_Ist_das_Leben_nicht_schoen/0014_Ist_das_Leben_nicht_schoen_00.08.51.223-00.08.51.865@0.json', 'split': 'val', 'place': 'in the street', 'event': '2 is walking down the sidewalk looking up at 1', 'event_idx': 13767, 'event_name': '<|det2|> is walking down the sidewalk looking up at <|det1|>', 'inference_relation': 'after', 'inference_text': ['talk with 1', 'follow the carriage', 'ask 1 a question', 'wait for a response from 1', 'follow 1 as he rides down the street'], 'inference_text_name': ['talk with <|det1|>', 'follow the carriage', 'ask <|det1|> a question', 'wait for a response from <|det1|>', 'follow <|det1|> as he rides down the street'], 'person2name': {'2': '<|det2|>', '1': '<|det1|>'}, 'name2person': {'<|det2|>': '2', '<|det1|>': '1'}}]
+
+
+print(input_record, "|||||||||||", data_input)
+
+{'img_fn': 'lsmdc_3088_WHATS_YOUR_NUMBER/3088_WHATS_YOUR_NUMBER_00.37.21.988-00.37.51.262@9.jpg', 'movie': '3088_WHATS_YOUR_NUMBER', 'metadata_fn': 'lsmdc_3088_WHATS_YOUR_NUMBER/3088_WHATS_YOUR_NUMBER_00.37.21.988-00.37.51.262@9.json', 'split': 'val', 'place': 'in a bedroom', 'event': '1 and 2 eat Chinese takeout on the floor while looking through paperwork', 'event_idx': 2, 'event_name': '<|det1|> and <|det2|> eat Chinese takeout on the floor while looking through paperwork', 'inference_relation': 'after', 'inference_text': ['Talk with 2 about the paper', 'Finish the food', 'write notes in his notebook', 'get up to get a drink'], 'inference_text_name': ['Talk with <|det2|> about the paper', 'Finish the food', 'write notes in his notebook', 'get up to get a drink'], 'person2name': {'2': '<|det2|>', '1': '<|det1|>'}, 'name2person': {'<|det2|>': '2', '<|det1|>': '1'}} |||||||||||
+[tensor([[50257, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256,
+         50256, 50256, 50256, 50256, 50256, 50256, 50258, 50259, 50268,   392,
+         50269,  4098,  3999,  1011,   448,   319,   262,  4314,   981,  2045,
+           832, 23143, 50260, 50256, 50256, 50256, 50256, 50256, 50256, 50256,
+         50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256,
+         50256, 50256, 50256, 50256, 50256, 50256, 50261,   259,   257, 14043,
+         50262, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256,
+         50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50266, 50256,
+         50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256,
+         50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256,
+         50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256,
+         50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256,
+         50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256]]), tensor([[[0.0000e+00, 1.8243e+00, 2.7287e-02,  ..., 9.0850e-03,
+          4.3136e-01, 0.0000e+00],
+         [0.0000e+00, 2.0679e-01, 0.0000e+00,  ..., 2.9788e-01,
+          3.9107e-01, 0.0000e+00],
+         [1.9168e-01, 3.3786e-01, 1.6769e-02,  ..., 2.4299e-03,
+          0.0000e+00, 1.5090e-03],
+         ...,
+         [0.0000e+00, 0.0000e+00, 0.0000e+00,  ..., 0.0000e+00,
+          0.0000e+00, 0.0000e+00],
+         [0.0000e+00, 0.0000e+00, 0.0000e+00,  ..., 0.0000e+00,
+          0.0000e+00, 0.0000e+00],
+         [0.0000e+00, 0.0000e+00, 0.0000e+00,  ..., 0.0000e+00,
+          0.0000e+00, 0.0000e+00]]]), tensor([[[   0.0000,    0.0000, 1920.0000, 1043.0000],
+         [ 645.9974,   82.6539, 1128.4912,  905.5052],
+         [1298.8362,  190.8231, 1799.4570,  967.6837],
+         [   0.0000,    0.0000,    0.0000,    0.0000],
+         [   0.0000,    0.0000,    0.0000,    0.0000],
+         [   0.0000,    0.0000,    0.0000,    0.0000],
+         [   0.0000,    0.0000,    0.0000,    0.0000],
+         [   0.0000,    0.0000,    0.0000,    0.0000],
+         [   0.0000,    0.0000,    0.0000,    0.0000],
+         [   0.0000,    0.0000,    0.0000,    0.0000],
+         [   0.0000,    0.0000,    0.0000,    0.0000],
+         [   0.0000,    0.0000,    0.0000,    0.0000],
+         [   0.0000,    0.0000,    0.0000,    0.0000],
+         [   0.0000,    0.0000,    0.0000,    0.0000],
+         [   0.0000,    0.0000,    0.0000,    0.0000]]]), tensor([[1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]), tensor([[0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]), tensor([[[[1., 1., 1.,  ..., 1., 1., 1.],
+                                                    [1., 1., 1.,  ..., 1., 1., 1.],
+                                                    [1., 1., 1.,  ..., 1., 1., 1.],
+                                                    ...,
+                                                    [1., 1., 1.,  ..., 1., 1., 1.],
+                                                    [1., 1., 1.,  ..., 1., 1., 1.],
+                                                    [1., 1., 1.,  ..., 1., 1., 1.]],
+
+                                                    [[0., 0., 0.,  ..., 0., 0., 0.],
+                                                    [0., 0., 0.,  ..., 0., 0., 0.],
+                                                    [0., 0., 0.,  ..., 0., 0., 0.],
+                                                    ...,
+                                                    [0., 0., 0.,  ..., 0., 0., 0.],
+                                                    [0., 0., 0.,  ..., 0., 0., 0.],
+                                                    [0., 0., 0.,  ..., 0., 0., 0.]],
+
+                                                    [[0., 0., 1.,  ..., 0., 0., 0.],
+                                                    [0., 0., 1.,  ..., 0., 0., 0.],
+                                                    [0., 1., 1.,  ..., 0., 0., 0.],
+                                                    ...,
+                                                    [0., 0., 0.,  ..., 1., 1., 1.],
+                                                    [0., 0., 0.,  ..., 1., 1., 1.],
+                                                    [0., 0., 0.,  ..., 0., 1., 0.]],
+
+                                                    ...,
+
+                                                    [[0., 0., 0.,  ..., 0., 0., 0.],
+                                                    [0., 0., 0.,  ..., 0., 0., 0.],
+                                                    [0., 0., 0.,  ..., 0., 0., 0.],
+                                                    ...,
+                                                    [0., 0., 0.,  ..., 0., 0., 0.],
+                                                    [0., 0., 0.,  ..., 0., 0., 0.],
+                                                    [0., 0., 0.,  ..., 0., 0., 0.]],
+
+                                                    [[0., 0., 0.,  ..., 0., 0., 0.],
+                                                    [0., 0., 0.,  ..., 0., 0., 0.],
+                                                    [0., 0., 0.,  ..., 0., 0., 0.],
+                                                    ...,
+                                                    [0., 0., 0.,  ..., 0., 0., 0.],
+                                                    [0., 0., 0.,  ..., 0., 0., 0.],
+                                                    [0., 0., 0.,  ..., 0., 0., 0.]],
+
+                                                    [[0., 0., 0.,  ..., 0., 0., 0.],
+                                                    [0., 0., 0.,  ..., 0., 0., 0.],
+                                                    [0., 0., 0.,  ..., 0., 0., 0.],
+                                                    ...,
+                                                    [0., 0., 0.,  ..., 0., 0., 0.],
+                                                    [0., 0., 0.,  ..., 0., 0., 0.],
+                                                    [0., 0., 0.,  ..., 0., 0., 0.]]]]), tensor([[50267, 50268, 50269,     0,     0,     0,     0,     0,     0,     0,
+                                                       0,     0,     0,     0,     0]]), tensor([[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]])]
+
+
+
+# ianma------------ <|det1|> is sternly looking forward in a dining room before enter the room
+# ianma------------ <|det1|> is sternly looking forward in a dining room before sit down at the table
+# ianma------------ <|det1|> is sternly looking forward in a dining room before want to eat
+# ianma------------ <|det1|> is sternly looking forward in a dining room before sit down at the table
+# ianma------------ <|det1|> is sternly looking forward in a dining room before hear something that made him unhappy
+# ianma------------ <|det1|> is sternly looking forward in a dining room before listen to what <|det2|> had to say
+# ianma------------ <|det1|> is sternly looking forward in a dining room after finish eating
+# ianma------------ <|det1|> is sternly looking forward in a dining room after stand up
+# ianma------------ <|det1|> is sternly looking forward in a dining room after leave the room
+# ianma------------ <|det1|> is sternly looking forward in a dining room after speak with <|det2|> and <|det3|>
+
+
+# print("ianma------------", event, '|||', place, '|||', inference, '|||', inference_text)
+
+ianma------------ Jessie is crossing the street ||| in the street ||| intent ||| get to the other side
+ianma------------ Jessie is crossing the street ||| in the street ||| intent ||| catch a taxi
+ianma------------ Jessie is crossing the street ||| in the street ||| before ||| leave the building
+ianma------------ Jessie is crossing the street ||| in the street ||| before ||| approach the street
+ianma------------ Jessie is crossing the street ||| in the street ||| before ||| approach the intersection
+ianma------------ Jessie is crossing the street ||| in the street ||| before ||| look both ways for traffic
+ianma------------ Jessie is crossing the street ||| in the street ||| after ||| find his car
+ianma------------ Jessie is crossing the street ||| in the street ||| after ||| drive home
+ianma------------ Jessie is crossing the street ||| in the street ||| after ||| notice the luxury car
+ianma------------ Jessie is crossing the street ||| in the street ||| after ||| watch the woman disembark
+ianma------------ Peyton is walking down the sidewalk ||| in the street ||| intent ||| go to the store
+ianma------------ Peyton is walking down the sidewalk ||| in the street ||| intent ||| get home
+ianma------------ Peyton is walking down the sidewalk ||| in the street ||| before ||| walk out of a building
+ianma------------ Peyton is walking down the sidewalk ||| in the street ||| before ||| walk past the car
+ianma------------ Peyton is walking down the sidewalk ||| in the street ||| before ||| check for cars before crossing
+ianma------------ Peyton is walking down the sidewalk ||| in the street ||| before ||| leave a building
+ianma------------ Peyton is walking down the sidewalk ||| in the street ||| after ||| keep walking
+ianma------------ Peyton is walking down the sidewalk ||| in the street ||| after ||| turn around to see who was in the car
+ianma------------ Peyton is walking down the sidewalk ||| in the street ||| after ||| go get something to eat
+ianma------------ Peyton is walking down the sidewalk ||| in the street ||| after ||| head to work
+ianma------------ Peyton is walking down the sidewalk ||| in the street ||| after ||| catch a taxi
+ianma------------ Jessie is wearing a chef  's jacket ||| a kitchen ||| intent ||| look like a pro
+ianma------------ Jessie is wearing a chef  's jacket ||| a kitchen ||| intent ||| keep his regular clothes clean
+ianma------------ Jessie is wearing a chef  's jacket ||| a kitchen ||| before ||| Put on the chefs hat
+ianma------------ Jessie is wearing a chef  's jacket ||| a kitchen ||| before ||| Walk into the kitchen
+ianma------------ Jessie is wearing a chef  's jacket ||| a kitchen ||| before ||| put on his jacket
+ianma------------ Jessie is wearing a chef  's jacket ||| a kitchen ||| before ||| enter the kitchen
+ianma------------ Jessie is wearing a chef  's jacket ||| a kitchen ||| after ||| Cook some food
+ianma------------ Jessie is wearing a chef  's jacket ||| a kitchen ||| after ||| Give other chefs orders
+ianma------------ Jessie is wearing a chef  's jacket ||| a kitchen ||| after ||| speak to someone
+ianma------------ Jessie is wearing a chef  's jacket ||| a kitchen ||| after ||| make a dish
+ianma------------ Jessie is standing in the kitchen ||| a kitchen ||| intent ||| do his job correctly
+ianma------------ Jessie is standing in the kitchen ||| a kitchen ||| intent ||| command the kitchen
+ianma------------ Jessie is standing in the kitchen ||| a kitchen ||| before ||| put on his uniform
+ianma------------ Jessie is standing in the kitchen ||| a kitchen ||| before ||| go to the kitchen
+ianma------------ Jessie is standing in the kitchen ||| a kitchen ||| before ||| go to the kitchen
+ianma------------ Jessie is standing in the kitchen ||| a kitchen ||| before ||| prepare food
+ianma------------ Jessie is standing in the kitchen ||| a kitchen ||| after ||| prepare food
+ianma------------ Jessie is standing in the kitchen ||| a kitchen ||| after ||| complete his shift
+ianma------------ Jessie is standing in the kitchen ||| a kitchen ||| after ||| cook dishes for customers
+ianma------------ Jessie is standing in the kitchen ||| a kitchen ||| after ||| taste food
+ianma------------ Riley is wearing a red bandana ||| a kitchen ||| intent ||| keep his hair out of the food
+ianma------------ Riley is wearing a red bandana ||| a kitchen ||| intent ||| stand out from the staff
+ianma------------ Riley is wearing a red bandana ||| a kitchen ||| before ||| walk into the kitchen
+ianma------------ Riley is wearing a red bandana ||| a kitchen ||| before ||| put on a red bandana
+ianma------------ Riley is wearing a red bandana ||| a kitchen ||| before ||| buy the red bandana
+ianma------------ Riley is wearing a red bandana ||| a kitchen ||| before ||| take the red bandana out of a drawer
+ianma------------ Riley is wearing a red bandana ||| a kitchen ||| before ||| go to work in the kitchen
+ianma------------ Riley is wearing a red bandana ||| a kitchen ||| after ||| get food out of the refrigerator
+ianma------------ Riley is wearing a red bandana ||| a kitchen ||| after ||| put food on the grill
+ianma------------ Riley is wearing a red bandana ||| a kitchen ||| after ||| cook an order
+ianma------------ Riley is wearing a red bandana ||| a kitchen ||| after ||| talk to Jessie
+ianma------------ Riley is walking through the airport with luggage ||| in an airport ||| intent ||| get to the plane
+ianma------------ Riley is walking through the airport with luggage ||| in an airport ||| intent ||| travel the world
+ianma------------ Riley is walking through the airport with luggage ||| in an airport ||| before ||| pack her luggage
+ianma------------ Riley is walking through the airport with luggage ||| in an airport ||| before ||| put on her uniform
+ianma------------ Riley is walking through the airport with luggage ||| in an airport ||| before ||| grab the handle on the luggage
+
+
+***** Example Instance for Split: train *****
+Text: [['<|b_img|>', '<|endoftext|>', '<|endoftext|>', '<|endoftext|>', '<|endoftext|>', '<|endoftext|>', '<|endoftext|>', '<|endoftext|>', '<|endoftext|>', '<|endoftext|>', '<|endoftext|>', '<|endoftext|>', '<|endoftext|>', '<|endoftext|>', '<|endoftext|>', '<|endoftext|>', '<|e_img|>'], ['<|b_ev|>', 'Jessie sits in a chair turning towards the people behind him', '<|e_ev|>'], [], ['<|before|>', 'sit down in his chair', '<|e_in|>']]
+Tokenized Text: [50257, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50258, 50259, 34648, 494, 10718, 287, 257, 5118, 6225, 3371, 262, 661, 2157, 683, 50260, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50264, 48937, 866, 287, 465, 5118, 50263, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256,
+50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 502
+56, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256]
+Labels: [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 48937, 866, 287, 465, 5118, 50263, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1]
+********
+
+
+print("====================================")
+print(objects)
+print(people)
+print(dets2use, old_det_to_new_ind, subjects)
+
+['person', 'person', 'bed']
+[ True  True False]
+[1] [-1, 1, -1] []
+  3%|█████                                                                                                                                                        | 1318/41304 [1:04:32<34:17:25,  3.09s/it]====================================
+['person', 'person', 'bed']
+[ True  True False]
+[0 1] [1, 2, -1] []
+  3%|█████                                                                                                                                                        | 1319/41304 [1:04:35<33:39:39,  3.03s/it]====================================
+['person', 'person', 'bed']
+[ True  True False]
+[0 1] [1, 2, -1] []
+  3%|█████                                                                                                                                                        | 1320/41304 [1:04:38<34:07:43,  3.07s/it]====================================
+['person', 'person', 'person', 'person', 'tie', 'chair']
+[ True  True  True  True False False]
+[0] [1, -1, -1, -1, -1, -1] []
+  3%|█████                                                                                                                                                        | 1321/41304 [1:04:41<34:03:47,  3.07s/it]====================================
+['person', 'person', 'person', 'person', 'tie', 'chair']
+[ True  True  True  True False False]
+[0] [1, -1, -1, -1, -1, -1] []
+  3%|█████                                                                                                                                                        | 1322/41304 [1:04:44<34:50:15,  3.14s/it]====================================
+['person', 'person', 'person', 'person', 'tie', 'chair']
+[ True  True  True  True False False]
+[0] [1, -1, -1, -1, -1, -1] []
+  3%|█████                                                                                                                                                        | 1323/41304 [1:04:48<35:57:45,  3.24s/it]====================================
+['person', 'person', 'person', 'person', 'tie', 'chair']
+[ True  True  True  True False False]
+[1 3] [-1, 1, -1, 2, -1, -1] []
+
+
+
+
+
++++++++++++++++++++++++++ Comet generation +++++++++++++++++++++++++
+
+Encoding Data:   0%|                                                                                       | 0/335388 [00:00<?, ?it/s]***** Example Instance for Split: train *****
+Text: [['<|b_img|>', '<|endoftext|>', '<|endoftext|>', '<|endoftext|>', '<|endoftext|>', '<|endoftext|>', '<|endoftext|>', '<|endoftext|>', '<|endoftext|>', '<|endoftext|>', '<|endoftext|>', '<|endoftext|>', '<|endoftext|>', '<|endoftext|>', '<|endoftext|>', '<|endoftext|>', '<|e_img|>'], ['<|b_ev|>', 'Jessie sits in a chair turning towards the people behind him', '<|e_ev|>'], ['<|intent|>']]
+Tokenized Text: [50257, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50258, 50259, 34648, 494, 10718, 287, 257, 5118, 6225, 3371, 262, 661, 2157, 683, 50260, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50265, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256]
+********
+
+***** Example Instance for Split: train *****
+Text: [['<|b_img|>', '<|endoftext|>', '<|endoftext|>', '<|endoftext|>', '<|endoftext|>', '<|endoftext|>', '<|endoftext|>', '<|endoftext|>', '<|endoftext|>', '<|endoftext|>', '<|endoftext|>', '<|endoftext|>', '<|endoftext|>', '<|endoftext|>', '<|endoftext|>', '<|endoftext|>', '<|e_img|>'], ['<|b_ev|>', 'Jessie sits in a chair turning towards the people behind him', '<|e_ev|>'], ['<|before|>']]
+Tokenized Text: [50257, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50258, 50259, 34648, 494, 10718, 287, 257, 5118, 6225, 3371, 262, 661, 2157, 683, 50260, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50264, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256]
+********
+
+***** Example Instance for Split: train *****
+Text: [['<|b_img|>', '<|endoftext|>', '<|endoftext|>', '<|endoftext|>', '<|endoftext|>', '<|endoftext|>', '<|endoftext|>', '<|endoftext|>', '<|endoftext|>', '<|endoftext|>', '<|endoftext|>', '<|endoftext|>', '<|endoftext|>', '<|endoftext|>', '<|endoftext|>', '<|endoftext|>', '<|e_img|>'], ['<|b_ev|>', 'Jessie sits in a chair turning towards the people behind him', '<|e_ev|>'], ['<|after|>']]
+Tokenized Text: [50257, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50258, 50259, 34648, 494, 10718, 287, 257, 5118, 6225, 3371, 262, 661, 2157, 683, 50260, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50266, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256]
+********
+
+***** Example Instance for Split: train *****
+Text: [['<|b_img|>', '<|endoftext|>', '<|endoftext|>', '<|endoftext|>', '<|endoftext|>', '<|endoftext|>', '<|endoftext|>', '<|endoftext|>', '<|endoftext|>', '<|endoftext|>', '<|endoftext|>', '<|endoftext|>', '<|endoftext|>', '<|endoftext|>', '<|endoftext|>', '<|endoftext|>', '<|e_img|>'], ['<|b_ev|>', 'Kendall walks towards the bartender at the bar', '<|e_ev|>'], ['<|intent|>']]
+Tokenized Text: [50257, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50258, 50259, 42, 437, 439, 11114, 3371, 262, 41118, 379, 262, 2318, 50260, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50265, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256]
+********
+
+***** Example Instance for Split: train *****
+Text: [['<|b_img|>', '<|endoftext|>', '<|endoftext|>', '<|endoftext|>', '<|endoftext|>', '<|endoftext|>', '<|endoftext|>', '<|endoftext|>', '<|endoftext|>', '<|endoftext|>', '<|endoftext|>', '<|endoftext|>', '<|endoftext|>', '<|endoftext|>', '<|endoftext|>', '<|endoftext|>', '<|e_img|>'], ['<|b_ev|>', 'Kendall walks towards the bartender at the bar', '<|e_ev|>'], ['<|before|>']]
+Tokenized Text: [50257, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50258, 50259, 42, 437, 439, 11114, 3371, 262, 41118, 379, 262, 2318, 50260, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50264, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256, 50256]
+********

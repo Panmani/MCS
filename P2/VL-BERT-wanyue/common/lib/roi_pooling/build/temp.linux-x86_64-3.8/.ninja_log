@@ -1,0 +1,11 @@
+# ninja log v5
+2	17004	1611229287792726900	/home/yuewan/project/VL-BERT/common/lib/roi_pooling/build/temp.linux-x86_64-3.8/home/yuewan/project/VL-BERT/common/lib/roi_pooling/cuda/ROIPool_cuda.o	b4cbae35fca8ac98
+2	17169	1611229287952391200	/home/yuewan/project/VL-BERT/common/lib/roi_pooling/build/temp.linux-x86_64-3.8/home/yuewan/project/VL-BERT/common/lib/roi_pooling/cuda/ROIAlign_cuda.o	24644d199c51158
+2	22254	1611229293041299800	/home/yuewan/project/VL-BERT/common/lib/roi_pooling/build/temp.linux-x86_64-3.8/home/yuewan/project/VL-BERT/common/lib/roi_pooling/cpu/ROIAlign_cpu.o	285f9e71bb11f5da
+1	25288	1611229296071581600	/home/yuewan/project/VL-BERT/common/lib/roi_pooling/build/temp.linux-x86_64-3.8/home/yuewan/project/VL-BERT/common/lib/roi_pooling/vision.o	c94bcd29be79a6d9
+202	17794	1611235000225718000	/home/yuewan/project/VL-BERT/common/lib/roi_pooling/build/temp.linux-x86_64-3.8/home/yuewan/project/VL-BERT/common/lib/roi_pooling/cuda/ROIPool_cuda.o	b2ed69bccf08cdf8
+202	17835	1611235000272592800	/home/yuewan/project/VL-BERT/common/lib/roi_pooling/build/temp.linux-x86_64-3.8/home/yuewan/project/VL-BERT/common/lib/roi_pooling/cuda/ROIAlign_cuda.o	f42b3b978746deef
+61	16157	1611235608059613600	/home/yuewan/project/VL-BERT/common/lib/roi_pooling/build/temp.linux-x86_64-3.8/home/yuewan/project/VL-BERT/common/lib/roi_pooling/cuda/ROIPool_cuda.o	8cbf57598d80fb16
+60	16177	1611235608075152300	/home/yuewan/project/VL-BERT/common/lib/roi_pooling/build/temp.linux-x86_64-3.8/home/yuewan/project/VL-BERT/common/lib/roi_pooling/cuda/ROIAlign_cuda.o	4323c523bb9d9526
+60	24171	1611235616013028100	/home/yuewan/project/VL-BERT/common/lib/roi_pooling/build/temp.linux-x86_64-3.8/home/yuewan/project/VL-BERT/common/lib/roi_pooling/cpu/ROIAlign_cpu.o	715bca5708a0020f
+60	28451	1611235620322604800	/home/yuewan/project/VL-BERT/common/lib/roi_pooling/build/temp.linux-x86_64-3.8/home/yuewan/project/VL-BERT/common/lib/roi_pooling/vision.o	12fed1eba2e608bd
