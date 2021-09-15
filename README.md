@@ -120,6 +120,7 @@ python scripts/run_finetuning.py --data_dir /path/to/visualcomet_annotations/  -
 ```
 python scripts/run_generation.py --data_dir ../visualcomet/ --model_name_or_path my_experiment/image-inference-80000-ckpt/ --split train --overwrite_cache
 ```
+![GT VL-BERT TRAIN](images/gpt2.png)
 
 ### VL-BERT
 Use additional GPT-2 generated high-level captions to pretrain VL-BERT
@@ -147,6 +148,10 @@ python oscar/vcr_captioning.py \
     --eval_model_dir pretrained_models/checkpoint-29-66420 \
     --num_keep_best 5
 ```
+
+## Experiments
+Pretrain with COCO
+![GT VL-BERT TRAIN](images/experiments.png)
 
 ## Phase 3 (P3)
 Experiment with pretrain and/or finetune
@@ -185,4 +190,15 @@ python scripts/run_vcr_gen.py --max_seq_len 256 --overwrite_cache --data_dir ./v
 1. Finetune VCR with high level caption for all images
 ```
 ./scripts/dist_run_single.sh 1 vcr/train_end2end.py cfgs/vcr/IAN_VCR_base_q2a_4x16G_fp32.yaml ./ckpt_all_vcr
+```
+
+## Reference
+```
+https://github.com/jackroos/VL-BERT
+https://github.com/jamespark3922/visual-comet
+
+https://github.com/ruotianluo/self-critical.pytorch
+https://github.com/aimagelab/meshed-memory-transformer
+https://github.com/microsoft/Oscar
+https://github.com/airsplay/py-bottom-up-attention
 ```
